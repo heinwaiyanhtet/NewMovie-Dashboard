@@ -57,7 +57,7 @@ function Dashboard() {
   const onPanelChange = (value, mode) => {
     console.log(value.format("YYYY-MM-DD"), mode);
   };
-
+  
   const items = [
     getItem("Dashboard", "1", <DashboardOutlined />),
 
@@ -156,7 +156,6 @@ function Dashboard() {
               onClick: () => setCollapsed(!collapsed),
             }
           )}
-
           <div className="flex justify-between items-center mr-8">
             <UserMenu />
           </div>

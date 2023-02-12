@@ -5,8 +5,6 @@ import {
 import './css/output.css';
 
 import Router from './route/Router';
-import { Provider } from 'react';
-
 // Import pages
 
 
