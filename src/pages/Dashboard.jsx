@@ -21,8 +21,8 @@ import {
   Row,
 } from "antd";
 import UserMenu from "../partials/header/UserMenu";
-
 const { Header, Sider, Content } = Layout;
+
 function getItem(label, key, icon, children) {
   return {
     key,
@@ -57,7 +57,7 @@ function Dashboard() {
   const onPanelChange = (value, mode) => {
     console.log(value.format("YYYY-MM-DD"), mode);
   };
-  
+
   const items = [
     getItem("Dashboard", "1", <DashboardOutlined />),
 
@@ -102,6 +102,10 @@ function Dashboard() {
     getItem("Free Operators", "27", <DashboardOutlined />),
   ];
 
+  function goUrl(items) {
+      console.log(items);
+  }
+
   return (
     <Layout>
       <Sider
@@ -113,7 +117,7 @@ function Dashboard() {
           top: 0,
           bottom: 0,
         }}
-
+       width = {210}
         trigger={null}
         collapsible 
         collapsed={collapsed}
@@ -137,10 +141,13 @@ function Dashboard() {
         <div className={`border border-b-gray-300 mx-4 ${collapsed && 'hidden'}`}></div>
 
         <Menu
-          theme="dark"
-          defaultSelectedKeys={["2"]}
-          mode="inline"
-          items={items}
+            theme="dark"
+            defaultSelectedKeys={["2"]}
+            mode="inline"
+            items={items}
+            // onClick={
+            //   event => {goUrl(event.target)}
+          // }
         />
       </Sider>
 
