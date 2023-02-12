@@ -70,36 +70,36 @@ function Dashboard() {
 
     getItem("Images", "sub2", <DashboardOutlined />,[
         getItem("Background Image", "6", <EyeOutlined />),
-        getItem("Promo Image", "3", <UserOutlined />),
-        getItem("Banner", "4", <UserOutlined />),
-        getItem("Ads Banner", "5", <UserAddOutlined />),
-        getItem("Company List", "6", <UserAddOutlined />),
-        getItem("Dinga Slider", "7", <UserAddOutlined />),
+        getItem("Promo Image", "7", <UserOutlined />),
+        getItem("Banner", "8", <UserOutlined />),
+        getItem("Ads Banner", "9", <UserAddOutlined />),
+        getItem("Company List", "10", <UserAddOutlined />),
+        getItem("Dinga Slider", "11", <UserAddOutlined />),
     ]),
 
 
     getItem("Images", "sub3", <DashboardOutlined />,[
-      getItem("Background Image", "8", <EyeOutlined />),
-      getItem("Promo Image", "9", <UserOutlined />),
-      getItem("Banner", "10", <UserOutlined />),
-      getItem("Ads Banner", "11", <UserAddOutlined />),
-      getItem("Company List", "12", <UserAddOutlined />),
-      getItem("Dinga Slider", "13", <UserAddOutlined />),
+      getItem("Background Image", "12", <EyeOutlined />),
+      getItem("Promo Image", "13", <UserOutlined />),
+      getItem("Banner", "14", <UserOutlined />),
+      getItem("Ads Banner", "15", <UserAddOutlined />),
+      getItem("Company List", "16", <UserAddOutlined />),
+      getItem("Dinga Slider", "17", <UserAddOutlined />),
   ]),
 
 
-    getItem("Advertisements", "14", <DashboardOutlined />,[
-        getItem("Pre Roll", "15", <EyeOutlined />),
-        getItem("Mid Roll", "16", <UserOutlined />),
+    getItem("Advertisements", "18", <DashboardOutlined />,[
+        getItem("Pre Roll", "19", <EyeOutlined />),
+        getItem("Mid Roll", "20", <UserOutlined />),
     ]),
     
-    getItem("Actors", "17", <DashboardOutlined />),
-    getItem("Owners", "18", <DashboardOutlined />),
-    getItem("MPT Policy", "19", <DashboardOutlined />),
-    getItem("Dinga Category", "20", <DashboardOutlined />),
-    getItem("Category", "21", <DashboardOutlined />),
-    getItem("Home Screen", "22", <DashboardOutlined />),
-    getItem("Free Operators", "23", <DashboardOutlined />),
+    getItem("Actors", "21", <DashboardOutlined />),
+    getItem("Owners", "22", <DashboardOutlined />),
+    getItem("MPT Policy", "23", <DashboardOutlined />),
+    getItem("Dinga Category", "24", <DashboardOutlined />),
+    getItem("Category", "25", <DashboardOutlined />),
+    getItem("Home Screen", "26", <DashboardOutlined />),
+    getItem("Free Operators", "27", <DashboardOutlined />),
   ];
 
   return (
@@ -170,7 +170,7 @@ function Dashboard() {
             <UserOutlined />
             <span>Users</span>
           </Breadcrumb.Item>
-          <Breadcrumb.Item>Admin</Breadcrumb.Item>Kyaw Si Thu
+          <Breadcrumb.Item>Admin</Breadcrumb.Item>
 
 
         </Breadcrumb>

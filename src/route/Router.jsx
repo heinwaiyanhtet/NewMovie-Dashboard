@@ -6,12 +6,12 @@ import Login from '../pages/Login';
 export default function Router() {
   return (
       <BrowserRouter>
-          <Routes>
-              <Route path='/'>
-                  <Route index element={<Dashboard />} />
-                  <Route path="/login" element={<Login />}/>
-              </Route>
-          </Routes>
+            <Routes>
+                <Route path='/'>
+                    <Route index element={<Dashboard />} />
+                    <Route path="/login" element={<Login />}/>
+                </Route>
+            </Routes>
       </BrowserRouter>
   )
 }
