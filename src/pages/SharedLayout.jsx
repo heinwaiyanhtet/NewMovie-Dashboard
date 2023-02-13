@@ -28,7 +28,7 @@ function getItem(label, key, icon, children) {
 }
 
 
-function Dashboard() {
+function Dashboard({children}) {
   const [collapsed, setCollapsed] = useState(false);
 
   const {
@@ -153,6 +153,9 @@ function Dashboard() {
             background: colorBgContainer,
           }}
         >
+
+          {children}
+
 
         </Content>
       </Layout>

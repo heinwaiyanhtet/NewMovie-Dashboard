@@ -8,7 +8,6 @@ import Router from './route/Router';
 // Import pages
 
 
-
 function App() {
   const location = useLocation();
 

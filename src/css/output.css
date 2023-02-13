@@ -854,6 +854,26 @@ select{
   margin-right: 0.75rem;
 }
 
+.ml-6{
+  margin-left: 1.5rem;
+}
+
+.ml-8{
+  margin-left: 2rem;
+}
+
+.ml-44{
+  margin-left: 11rem;
+}
+
+.ml-52{
+  margin-left: 13rem;
+}
+
+.ml-56{
+  margin-left: 14rem;
+}
+
 .block{
   display: block;
 }

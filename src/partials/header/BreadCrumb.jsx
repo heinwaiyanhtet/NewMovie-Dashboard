@@ -3,11 +3,15 @@ import {
     Breadcrumb,
   } from "antd";
 
+  import {
+    UserOutlined,
+    HomeOutlined,
+  } from "@ant-design/icons";
 
 
-export default function Breadcrumb() {
+export default function BreadCrumb() {
   return (
-    <Breadcrumb className="mt-4 ml-4">
+    <Breadcrumb className="mt-4 ml-8">
         <Breadcrumb.Item href="">
         <HomeOutlined />
         </Breadcrumb.Item>
