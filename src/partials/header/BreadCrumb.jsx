@@ -11,7 +11,7 @@ import {
 
 export default function BreadCrumb() {
   return (
-    <Breadcrumb className="mt-4 ml-8">
+    <Breadcrumb className="mt-6 ml-8">
         <Breadcrumb.Item href="">
         <HomeOutlined />
         </Breadcrumb.Item>

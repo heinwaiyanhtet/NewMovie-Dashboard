@@ -108,11 +108,6 @@ function Dashboard() {
   //   getItem("Free Operators", "27", <DashboardOutlined />),
   // ];
 
-  function goUrl(items) {
-      console.log(items);
-  }
-  
-
   return (
     <Layout>
       <Sider
@@ -133,7 +128,7 @@ function Dashboard() {
           <Menu theme="dark" mode="inline" items={0} />
         </div>
 
-        <div className="flex justify-around items-center mx-4 my-2">
+        <div className="flex justify-around items-center mx-4 my-2 mb-1">
           <svg
             width="40px"
             height="40px"
@@ -145,6 +140,7 @@ function Dashboard() {
           </svg>
           <h1 className={`text-gray-300 p-3 font-semibold text-base ${collapsed && 'hidden'}`}>Admin</h1>
         </div>
+
         <div className={`border border-b-gray-300 mx-4 ${collapsed && 'hidden'}`}></div>
 
         <Menu
@@ -153,7 +149,10 @@ function Dashboard() {
             mode="inline"
             // items={items}
             ref = {MenuKeyRef}
-            openKeys={"sub1"}
+            style={{
+              marginTop:20
+            }}
+            // openKeys={"sub1"}
             
         >
               <Menu.Item key="1" icon={<DashboardOutlined />}>
@@ -220,7 +219,6 @@ function Dashboard() {
             background: colorBgContainer,
           }}
         >
-
           <div className="mb-10">
             <Row gutter={16}>
               <Col span={6}>
@@ -242,6 +240,7 @@ function Dashboard() {
           <div className="mb-6">
             <Calendar onPanelChange={onPanelChange} />
           </div>
+
 
           <div className="grid grid-cols-12 gap-6">
             <DashboardCard01 />
@@ -269,7 +268,6 @@ function Dashboard() {
             <DashboardCard12 />
             {/* Card (Income/Expenses) */}
             <DashboardCard13 />
-
           </div>
         </Content>
       </Layout>
@@ -279,24 +277,6 @@ function Dashboard() {
 
 export default Dashboard;
 
-
-
-// onClick={
-//   _ => {
-
-    // let selectedClass = document.getElementsByClassName("ant-menu-item-selected");
-    // console.log(selectedClass);
-
-    // const childElement = MenuKeyRef.current.menu.list.children;
-    // console.log(childElement);
-    //  for (let i = 0; i < childElement?.length; i++)
-    //   {
-    //     if (childElement[i].classList.contains("ant-menu-item-selected")) {
-            
-    //     } 
-    //   }
-  
-//   }
 // }
 
 
