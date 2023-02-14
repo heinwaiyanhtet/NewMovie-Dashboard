@@ -6,36 +6,27 @@ import {
   DashboardOutlined,
   EyeOutlined,
 } from "@ant-design/icons";
-
 import {
   Layout,
   Menu,
   theme,
 } from "antd";
-
+const { Header, Sider, Content } = Layout;
 const {SubMenu} = Menu;
+
 
 import UserMenu from "../partials/header/UserMenu";
 import BreadCrumb from "../partials/header/BreadCrumb";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import  { routeActions } from "../store/route-slice";
 
 
-const { Header, Sider, Content } = Layout;
 const MenuKeyRef = React.createRef();
 
-function getItem(label, key, icon, children) {
-  return {
-    key,
-    icon,
-    children,
-    label,
-  };
-}
-
-
 function Dashboard() {
-  const [collapsed, setCollapsed] = useState(false);
 
+  const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer },
   } = theme.useToken();
@@ -45,6 +36,17 @@ function Dashboard() {
     console.log(value.format("YYYY-MM-DD"), mode);
   };
 
+  // const dispatch = useDispatch()
+  
+  const navigation = useNavigate();
+  const NavigationHandle = (url) => {
+      //console.log(url);
+      navigation(url);
+      // dispatch
+      // (
+      //     routeActions.handleNavigation({type:'ROUTE_CHANGE',url,navigation})
+      // )
+  };
 
   return (
     <Layout>
@@ -93,14 +95,29 @@ function Dashboard() {
             // openKeys={"sub1"}
             
         >
-              <Menu.Item key="1" icon={<DashboardOutlined />}>
-              <Link to="https://google.com">Dashboard</Link>
+
+              <Menu.Item key="1" 
+                    icon={<DashboardOutlined />}
+                    onClick={ _ => NavigationHandle("/")}>
+                    <span className="select-none">
+                        Dashboard
+                    </span>
               </Menu.Item>
-              <Menu.Item key="2" icon={<DesktopOutlined />}>
-                <Link to="/user">User</Link>
+              <Menu.Item key="2"
+                         icon={<DesktopOutlined />}
+                         onClick={_ => NavigationHandle("/users")}
+                    >
+                    <span className="select-none">
+                        Users
+                    </span>
               </Menu.Item>
-              <Menu.Item key="3" icon={<EyeOutlined />}>
-                <Link to="/form">Form</Link>
+              <Menu.Item key="3"
+                         icon={<EyeOutlined />}
+                         onClick={_ => NavigationHandle('/form')}
+              >
+                <span className="select-none">
+                        forms
+                 </span>
               </Menu.Item>
 
 
@@ -130,6 +147,7 @@ function Dashboard() {
             </Menu>
       </Sider>
 
+
       <Layout className={`site-layout ${collapsed ? "ml-20" : "ml-56"}`}>
         <Header
           style={{ padding: 0, background: colorBgContainer }}
@@ -157,16 +175,24 @@ function Dashboard() {
             background: colorBgContainer,
           }}
         >
-         
             <Outlet />
-
         </Content>
       </Layout>
     </Layout>
   );
+
 }
 
 export default Dashboard;
+
+// function getItem(label, key, icon, children) {
+//   return {
+//     key,
+//     icon,
+//     children,
+//     label,
+//   };
+// }
 
 
 

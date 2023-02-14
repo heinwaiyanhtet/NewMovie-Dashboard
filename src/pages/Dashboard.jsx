@@ -8,7 +8,6 @@ import {
   Row
 } from "antd";
 
-
 import DashboardCard01 from "../partials/dashboard/DashboardCard01";
 import DashboardCard02 from "../partials/dashboard/DashboardCard02";
 import DashboardCard03 from "../partials/dashboard/DashboardCard03";
@@ -32,7 +31,6 @@ function Dashboard() {
   const onPanelChange = (value, mode) => {
     console.log(value.format("YYYY-MM-DD"), mode);
   };
-
 
   return (
      <>
