@@ -1,11 +1,25 @@
 import { useState } from 'react';
-import UserPool from '../partials/actions/UserPool';
+
+// import {
+// 	CognitoUserPool,
+// 	CognitoUserAttribute,
+// 	CognitoUser,
+// } from 'amazon-cognito-identity-js';
+
 
 function Singup() {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
+  
+  var CognitoUserPool = AmazonCognitoIdentity.CognitoUserPool;
+  var poolData = {
+    UserPoolId: 'us-east-1_kakXpKU9H',
+    ClientId: '7t2ip97o0mcqu4n3ukb4nbvnek', 
+  };
+
+  var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
