@@ -5,6 +5,7 @@ import Login from '../pages/Login';
 import SharedLayout from '../pages/SharedLayout'
 import Users from '../pages/Users';
 import Form from '../pages/Form';
+import Singup from '../pages/Singup';
 
 export default function Router() {
   return (
@@ -16,6 +17,7 @@ export default function Router() {
                     <Route path='/form' element={ <Form />} />
                 </Route>
                 <Route path="login" element={<Login />}/>
+                <Route path="singup" element={<Singup />}/>
             </Routes>
       </BrowserRouter>
   )
