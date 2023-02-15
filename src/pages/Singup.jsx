@@ -12,14 +12,66 @@ function Singup() {
     email: '',
     password: '',
   });
-  
-  var CognitoUserPool = AmazonCognitoIdentity.CognitoUserPool;
+
+  //var CognitoUserPool = AmazonCognitoIdentity.CognitoUserPool;
+
   var poolData = {
     UserPoolId: 'us-east-1_kakXpKU9H',
     ClientId: '7t2ip97o0mcqu4n3ukb4nbvnek', 
   };
 
-  var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+  var UserPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+
+  var attributeList = [];
+  var dataEmail = {
+        Name: 'email',
+        Value: 'heinwaiyanhtet2020@gmail.com',
+  }
+
+  var dataPhoneNumber = {
+      Name: 'phone_number',
+      Value: '+15555555555',
+  };
+
+  var dataPicture = {
+    Name: 'picture',
+    Value: 'https://photo.com',
+};
+
+var dataUpdatedAt = {
+  Name: 'updated_at',
+  Value: '1676482683606',
+};
+
+
+var dataName = {
+  Name: 'name',
+  Value: 'hein wai yan htet',
+};
+
+
+  var attributeEmail = new AmazonCognitoIdentity.CognitoUserAttribute(dataEmail);
+  var attributePhoneNumber = new AmazonCognitoIdentity.CognitoUserAttribute(
+    dataPhoneNumber
+  );
+  var attributePicture = new AmazonCognitoIdentity.CognitoUserAttribute(
+    dataPicture
+  );
+
+  var attributeUpdatedAt = new AmazonCognitoIdentity.CognitoUserAttribute(
+    dataUpdatedAt
+  );
+
+  var attributeName = new AmazonCognitoIdentity.CognitoUserAttribute(
+    dataName
+  );
+
+  attributeList.push(attributeEmail);
+  attributeList.push(attributePhoneNumber);
+  attributeList.push(attributePicture)
+  attributeList.push(attributeUpdatedAt)
+  attributeList.push(attributeName)
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,15 +80,16 @@ function Singup() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData.email,formData.password);
+    // console.log(formData.email,formData.password);
     // handle form submission logic here
 
-    // UserPool.Singup(formData.email,formData.password,[],null,(err,data) => {
-    //     if(err){
-    //       console.log(err)
-    //     }
-    //     console.log(data);
-    // })
+    UserPool.signUp('heinwaiyanhtet','ABcd123!@',attributeList,null,(err,data) => {
+        if(err){
+          console.log(err)
+          return
+        }
+        console.log(data);
+    })
 
   };
 
