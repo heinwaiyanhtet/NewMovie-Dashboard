@@ -1,76 +1,35 @@
 import { useState } from 'react';
 
-// import {
-// 	CognitoUserPool,
-// 	CognitoUserAttribute,
-// 	CognitoUser,
-// } from 'amazon-cognito-identity-js';
-
-
 function Singup() {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
+    username:'',
   });
 
-  //var CognitoUserPool = AmazonCognitoIdentity.CognitoUserPool;
+  // var CognitoUserPool = AmazonCognitoIdentity.CognitoUserPool;
 
   var poolData = {
-    UserPoolId: 'us-east-1_kakXpKU9H',
-    ClientId: '7t2ip97o0mcqu4n3ukb4nbvnek', 
+      UserPoolId: 'us-east-1_F5zpL0Sb2',
+      ClientId: '3ve1g9imt3brp9qgo568u84ufl', 
   };
 
   var UserPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
 
   var attributeList = [];
-  var dataEmail = {
-        Name: 'email',
-        Value: 'heinwaiyanhtet2020@gmail.com',
-  }
-
-  var dataPhoneNumber = {
-      Name: 'phone_number',
-      Value: '+15555555555',
+  var dataName = {
+    Name: 'name',
+    Value: formData.username
   };
-
-  var dataPicture = {
-    Name: 'picture',
-    Value: 'https://photo.com',
-};
-
-var dataUpdatedAt = {
-  Name: 'updated_at',
-  Value: '1676482683606',
-};
-
-
-var dataName = {
-  Name: 'name',
-  Value: 'hein wai yan htet',
-};
-
-
+  var dataEmail = {
+      Name: 'email',
+      Value: formData.email
+  }
+  var attributeName = new AmazonCognitoIdentity.CognitoUserAttribute(dataName);
   var attributeEmail = new AmazonCognitoIdentity.CognitoUserAttribute(dataEmail);
-  var attributePhoneNumber = new AmazonCognitoIdentity.CognitoUserAttribute(
-    dataPhoneNumber
-  );
-  var attributePicture = new AmazonCognitoIdentity.CognitoUserAttribute(
-    dataPicture
-  );
-
-  var attributeUpdatedAt = new AmazonCognitoIdentity.CognitoUserAttribute(
-    dataUpdatedAt
-  );
-
-  var attributeName = new AmazonCognitoIdentity.CognitoUserAttribute(
-    dataName
-  );
-
-  attributeList.push(attributeEmail);
-  attributeList.push(attributePhoneNumber);
-  attributeList.push(attributePicture)
-  attributeList.push(attributeUpdatedAt)
+  
   attributeList.push(attributeName)
+  attributeList.push(attributeEmail);
 
 
   const handleChange = (e) => {
@@ -79,24 +38,39 @@ var dataName = {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    // console.log(formData.email,formData.password);
-    // handle form submission logic here
+      e.preventDefault();
+      console.log(formData.username,formData.email,formData.password);
 
-    UserPool.signUp('heinwaiyanhtet','ABcd123!@',attributeList,null,(err,data) => {
-        if(err){
-          console.log(err)
-          return
-        }
-        console.log(data);
-    })
+      // handle form submission logic here
 
+      UserPool.signUp(formData.username,formData.password,attributeList,null,(err,data) => {
+          if(err){
+            console.log(err)
+            return
+          }
+          console.log(data);
+      })
   };
 
   return (
     <div className="min-width-full w-[30%] mt-36 mx-auto bg-white p-8 rounded-md shadow-md">
-      <h2 className="text-lg font-medium mb-4">Contact Us</h2>
+      <h2 className="text-lg font-medium mb-4">Register</h2>
       <form onSubmit={handleSubmit}>
+        
+      <div className="mb-4">
+          <label htmlFor="username" className="block text-gray-700 font-medium mb-2">
+            User Name
+          </label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            value={formData.username}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+          />
+        </div>
+        
         <div className="mb-4">
           <label htmlFor="email" className="block text-gray-700 font-medium mb-2">
             Email

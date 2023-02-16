@@ -17,7 +17,7 @@ export default function Router() {
                     <Route path='/form' element={ <Form />} />
                 </Route>
                 <Route path="login" element={<Login />}/>
-                <Route path="singup" element={<Singup />}/>
+                <Route path="register" element={<Singup />}/>
             </Routes>
       </BrowserRouter>
   )
