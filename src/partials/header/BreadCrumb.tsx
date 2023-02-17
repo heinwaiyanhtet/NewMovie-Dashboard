@@ -9,7 +9,7 @@ import {
   } from "@ant-design/icons";
 
 
-export default function BreadCrumb() {
+const BreadCrumb : React.FC = () => {
   return (
     <Breadcrumb className="mt-6 ml-8">
         <Breadcrumb.Item href="">
@@ -23,3 +23,5 @@ export default function BreadCrumb() {
     </Breadcrumb>
   )
 }
+
+export default BreadCrumb;

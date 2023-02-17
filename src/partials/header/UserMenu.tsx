@@ -1,8 +1,14 @@
 import React from 'react'
 import { Dropdown } from 'antd';
 import UserAvatar from '../../images/user-avatar-32.png'
+import type { MenuProps } from 'antd';
 
-const items = [
+
+interface Props{
+    name:string,
+}
+
+const items : MenuProps['items'] = [
   {
     key: '1',
     label: (
@@ -32,6 +38,7 @@ const items = [
 
 export default function UserMenu() {
   return (
+      
        <>
         <img className="w-8 h-8 rounded-full" src={UserAvatar} width="32" height="32" alt="User" />
             <Dropdown
