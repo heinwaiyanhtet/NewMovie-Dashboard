@@ -8,11 +8,11 @@ const routeSlice = createSlice({
     },
 
     reducers:{
-        handleNavigation(state,action,navigation){
-            // if(action.payload.type === "ROUTE_CHANGE"){
-            //     action.payload.navigation(action.payload.url)
-            // }
-        }
+        // handleNavigation(state,action,navigation){
+        //     // if(action.payload.type === "ROUTE_CHANGE"){
+        //     //     action.payload.navigation(action.payload.url)
+        //     // }
+        // }
     }
 })
 

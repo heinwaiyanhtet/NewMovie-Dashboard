@@ -1,7 +1,6 @@
 import { Amplify,Auth} from 'aws-amplify';
-import React, { ChangeEventHandler } from 'react';
+import React, { ChangeEvent, ChangeEventHandler } from 'react';
 import { useState } from 'react';
-
 
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { Input } from 'antd';
@@ -15,7 +14,6 @@ interface SignUpFormData {
   password: string;
 }
 
-
 const Singup : React.FC = () => {
   const [formData, setFormData] = useState<SignUpFormData>({
       name:'',
@@ -24,7 +22,7 @@ const Singup : React.FC = () => {
   });
 
 
-  const handleChange : ChangeEventHandler<HTMLInputElement> =  (event : React.FormEvent<HTMLFormElement>) => {
+  const handleChange  =  (event : ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.currentTarget;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
@@ -42,7 +40,7 @@ const Singup : React.FC = () => {
           },        
         })
 
-        console.log(user)
+        
       }
 
       catch(error){
@@ -102,15 +100,6 @@ const Singup : React.FC = () => {
                     placeholder="input password"
                     iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
                   />
-
-                  {/* <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
-                  /> */}
                 </div>
                 <button
                   type="submit"
