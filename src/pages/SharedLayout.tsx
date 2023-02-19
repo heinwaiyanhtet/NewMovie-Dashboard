@@ -15,25 +15,19 @@ import {
 } from "antd";
 const { Header, Sider, Content } = Layout;
 const {SubMenu} = Menu;
-
 // type MenuItem = Required<MenuProps>['items'][number];
-
-
-
 import UserMenu from "../partials/header/UserMenu";
 import BreadCrumb from "../partials/header/BreadCrumb";
 import { Outlet, useNavigate } from "react-router-dom";
 
-
-
 const MenuKeyRef = React.createRef();
 
 function Dashboard() {
-
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+
   //for side bar dropdown
 
   // const onPanelChange = (value, mode) => {
@@ -110,7 +104,7 @@ function Dashboard() {
               </Menu.Item>
               <Menu.Item key="2"
                          icon={<DesktopOutlined />}
-                         onClick={_ => NavigationHandle("/users")}
+                         onClick={ _ => NavigationHandle("/users")}
                     >
                     <span className="select-none">
                         Users
@@ -198,9 +192,3 @@ export default Dashboard;
 //     label,
 //   };
 // }
-
-
-
-  
-
-

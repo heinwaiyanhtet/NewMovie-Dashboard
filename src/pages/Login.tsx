@@ -1,6 +1,16 @@
+import { Amplify, Auth } from 'aws-amplify';
+import React from 'react';
 import { useState } from 'react';
+import AwsConfigAuth from "../config/auth";
+(Amplify as any).configure({ Auth: AwsConfigAuth });
+
+
+import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
+import {  Input } from 'antd';
+
 
 function Login() {
+  // const auth = useAuth();
   const [formData, setFormData] = useState({
     username:'',
     password: '',
@@ -11,85 +21,21 @@ function Login() {
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      console.log(formData.username,formData.password);
+      const result = await Auth.signIn(formData.username,formData.password)
+      if(result.success){
+          console.log("you are authenticated");
+      }
+      else
+      {
+          console.log("mahar nay par tal")
+      }
 
-    // //authentication data
-    //   var authData = {
-    //         Username: formData.username,
-    //         Password: formData.password,
-    //   };
-
-    // // authentication detail
-    //    var AuthenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(authData);
-  
-
-    // //poor data
-    //     var poolData = {
-    //         UserPoolId: 'us-east-1_F5zpL0Sb2',
-    //         ClientId: '3ve1g9imt3brp9qgo568u84ufl',
-    //     }
-    //     var UserPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
-
-    // //user data
-    //     var userData = {
-    //         username: formData.username,
-    //         Pool:UserPool
-    //     }
-    //     var CognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
-
-
-    //     CognitoUser.authenticateUser(AuthenticationDetails, {
-    //         onSuccess: (result) => {
-    //         console.log('login success', result);
-    //         },
-    //         onFailure: (err) => {
-    //         console.log('login failure', err);
-    //         },
-    //         newPasswordRequired: (data) => {
-    //         console.log('new password required', data);
-    //         },
-    //     });
-
-
-    var poolData = {
-        UserPoolId: 'us-east-1_F5zpL0Sb2',
-        ClientId: '3ve1g9imt3brp9qgo568u84ufl',
-      };
-      var UserPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
-    
-      //user data
-      var userData = {
-        Username: formData.username,
-        Pool: UserPool,
-      };
-      var CognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
-    
-      //authentication data
-      var authData = {
-        Username: formData.username,
-        Password: formData.password,
-      };
-    
-      // authentication detail
-      var AuthenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(authData);
-
-      CognitoUser.authenticateUser(AuthenticationDetails, {
-        onSuccess: (result) => {
-          console.log('login success', result);
-        },
-        onFailure: (err) => {
-          console.log('login failure', err);
-        },
-        newPasswordRequired: (data) => {
-          console.log('new password required', data);
-        },
-      });
   };
 
   return (
-    <div className="min-width-full w-[30%] mt-64 mx-auto bg-white p-8 rounded-md shadow-2xl">
+    <div className="min-width-full w-[30%] mt-36 mx-auto bg-white p-8 rounded-md shadow-2xl">
       <h2 className="text-center text-lg font-medium mb-4">Login</h2>
       <form onSubmit={handleSubmit}>
         
@@ -111,14 +57,16 @@ function Login() {
           <label htmlFor="password" className="block text-gray-700 font-medium mb-2">
             Pasword
           </label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
-          />
+
+            <Input.Password
+                size="large"
+                id="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                placeholder="input password"
+                iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+            />
         </div>
         <button
           type="submit"
@@ -130,6 +78,6 @@ function Login() {
     </div>
   );
 }
-
 export default Login;
+
 
