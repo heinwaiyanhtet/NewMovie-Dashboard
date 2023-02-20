@@ -1,0 +1,60 @@
+import {  Card, Input } from 'antd'
+import { Auth } from 'aws-amplify';
+import React, { ChangeEvent, useState } from 'react'
+import { useParams } from 'react-router-dom'
+
+interface SignUpFormData {
+    code:string,
+}
+
+const ConfrimatinCode : React.FC = () => {
+  const parms = useParams(); 
+
+  const [formData, setFormData] = useState<SignUpFormData>({
+       code:'',
+  });
+  const handleChange  =  (event : ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.currentTarget;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
+  const handleSubmit = async (e : React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+            await Auth.confirmSignUp(parms.username, formData.code);
+        } catch (error) {
+            console.log('error confirming sign up', error);
+        }
+  };
+
+  return (
+    <div className='flex justify-center mt-44'>        
+        <Card title="Card title" bordered={false} style={{ width: 500 }}>
+            <form onSubmit={handleSubmit}>
+
+            <div className="mb-4">
+                    <label htmlFor="code" className="block text-gray-700 font-medium mb-2">
+                    Confirmation Code
+                    </label>
+                    <input
+                    type="text"
+                    id="code"
+                    name="code"
+                    value={formData.code}
+                    onChange={handleChange}
+                    className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+                    />
+                </div>
+
+                <button type="submit" className="mt-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            Click me
+                </button>
+
+            </form>
+        </Card>
+    </div>
+  )
+}
+
+export default ConfrimatinCode
+

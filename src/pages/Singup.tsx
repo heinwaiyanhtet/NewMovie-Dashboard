@@ -6,6 +6,8 @@ import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { Input } from 'antd';
 
 import AwsConfigAuth from "../config/auth";
+import { useNavigate } from 'react-router-dom';
+
 (Amplify as any).configure({ Auth: AwsConfigAuth });
 
 interface SignUpFormData {
@@ -15,17 +17,22 @@ interface SignUpFormData {
 }
 
 const Singup : React.FC = () => {
+
   const [formData, setFormData] = useState<SignUpFormData>({
       name:'',
       email: '',
       password: '',
   });
-
-
+  
   const handleChange  =  (event : ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.currentTarget;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
+  const navigate = useNavigate();
+  
+  const confrimatinCode = (user : string) : void => {
+      navigate(`/confirmation-code/${user}`)
+  }
 
   const handleSubmit = async (e : React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
@@ -39,8 +46,8 @@ const Singup : React.FC = () => {
             name: formData.name
           },        
         })
-
-        
+        const userName = user.getUsername();
+        confrimatinCode(userName);
       }
 
       catch(error){

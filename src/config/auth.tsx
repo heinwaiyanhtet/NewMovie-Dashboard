@@ -1,7 +1,6 @@
 const AwsConfigAuth = {
 
-          userPoolId: 'us-east-1_F5zpL0Sb2',
-
+        userPoolId: 'us-east-1_F5zpL0Sb2',
         // OPTIONAL - Amazon Cognito Web Client ID (26-char alphanumeric string)
         userPoolWebClientId: '3ve1g9imt3brp9qgo568u84ufl',
     // region: process.env.REACT_APP_AUTH_REGION,

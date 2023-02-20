@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useParams } from 'react-router-dom';
 import Dashboard from '../pages/Dashboard';
 import Login from '../pages/Login';
 import SharedLayout from '../pages/SharedLayout'
@@ -8,8 +8,10 @@ import Singup from '../pages/Singup';
 import { FunctionComponent } from 'react';
 import React from 'react';
 import UserAuth from '../pages/UserAuth';
+import ConfirmedCode from '../pages/ConfirmedCode';
 
 const Router: FunctionComponent = () => {
+  // const params = useParams();
   return (
     <BrowserRouter>
       <Routes>
@@ -22,6 +24,7 @@ const Router: FunctionComponent = () => {
 
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Singup />} />
+        <Route path="/confirmation-code/:username" element={<ConfirmedCode />}/>
         <Route path="/user-auth" element={<UserAuth signOut={undefined} user={undefined} />}/>
 
       </Routes>
