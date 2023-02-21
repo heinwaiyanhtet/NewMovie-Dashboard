@@ -1,12 +1,14 @@
 import { Amplify,Auth} from 'aws-amplify';
 import React, { ChangeEvent, ChangeEventHandler } from 'react';
-import { useState } from 'react';
-
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { Input } from 'antd';
 
 import AwsConfigAuth from "../config/auth";
+
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import Swal from 'sweetalert2';
 
 (Amplify as any).configure({ Auth: AwsConfigAuth });
 
@@ -22,14 +24,14 @@ const Singup : React.FC = () => {
       name:'',
       email: '',
       password: '',
-  });
+   });
   
   const handleChange  =  (event : ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.currentTarget;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
+
   const navigate = useNavigate();
-  
   const confrimatinCode = (user : string) : void => {
       navigate(`/confirmation-code/${user}`)
   }
@@ -47,19 +49,27 @@ const Singup : React.FC = () => {
           },        
         })
         const userName = user.getUsername();
-        confrimatinCode(userName);
+        await confrimatinCode(userName);
+        await Swal.fire({
+          icon:'success',
+          title:'Sign up successful',
+          text:`confrimation code was sent to ${formData.email}`,
+        });
       }
 
       catch(error){
-        console.log('error singing up',error)
+        console.log('error signing up',error)
+        await Swal.fire({
+          icon:'error',
+          title:'Error signing up',
+          text:error.message
+        })
       }
   };
 
-
-
   return (
     <div className='h-screen flex items-center justify-center'>
-        <div className="min-width-full w-[30%]  bg-white p-8 rounded-md shadow-md">
+        <div className="min-width-full w-[30%]  bg-white p-8 rounded-md shadow-md animate_animated animate__fadeInLeft">
               <h2 className="text-lg font-medium mb-4">Register</h2>
               <form onSubmit={handleSubmit}>
                 

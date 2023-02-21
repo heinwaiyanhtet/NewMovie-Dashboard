@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -6,8 +6,6 @@ import {
   DashboardOutlined,
   EyeOutlined,
 } from "@ant-design/icons";
-import type { MenuProps } from 'antd';
-
 import {
   Layout,
   Menu,
@@ -16,35 +14,33 @@ import {
 const { Header, Sider, Content } = Layout;
 const {SubMenu} = Menu;
 // type MenuItem = Required<MenuProps>['items'][number];
+
+
+import env from "react-dotenv";
+
 import UserMenu from "../partials/header/UserMenu";
 import BreadCrumb from "../partials/header/BreadCrumb";
-import { Outlet, useNavigate } from "react-router-dom";
-
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 const MenuKeyRef = React.createRef();
 
+
 function Dashboard() {
+
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer },
   } = theme.useToken();
-
-  //for side bar dropdown
-
-  // const onPanelChange = (value, mode) => {
-  //   console.log(value.format("YYYY-MM-DD"), mode);
-  // };
-
-  // const dispatch = useDispatch()
   
+  const location = useLocation();  
   const navigation = useNavigate();
   const NavigationHandle = (url : string) : void => {
-      //console.log(url);
       navigation(url);
-      // dispatch
-      // (
-      //     routeActions.handleNavigation({type:'ROUTE_CHANGE',url,navigation})
-      // )
   };
+
+  useEffect(() => {
+    // console.log(env)
+    console.log(env.REACT_APP_AUTH_REGION)
+  },[]);
 
   return (
     <Layout>
@@ -85,40 +81,42 @@ function Dashboard() {
 
         <Menu
             theme="dark"
-            defaultSelectedKeys={["1"]}
+            // defaultSelectedKeys={["1"]}
             mode="inline"
             // items={items}
             style={{
               marginTop:20
             }}
             // openKeys={"sub1"}
-            
         >
-
               <Menu.Item key="1" 
                     icon={<DashboardOutlined />}
+                    className={location.pathname === "/" ? "ant-menu-item-selected" : ""}
                     onClick={ _ => NavigationHandle("/")}>
                     <span className="select-none">
                         Dashboard
                     </span>
               </Menu.Item>
+
               <Menu.Item key="2"
                          icon={<DesktopOutlined />}
                          onClick={ _ => NavigationHandle("/users")}
+                         className={location.pathname==="/users" ? "ant-menu-item-selected" : ""}
                     >
                     <span className="select-none">
                         Users
                     </span>
               </Menu.Item>
+
               <Menu.Item key="3"
                          icon={<EyeOutlined />}
                          onClick={_ => NavigationHandle('/form')}
+                         className={location.pathname==="/form" ? "ant-menu-item-selected" : ""}
               >
                 <span className="select-none">
                         forms
                  </span>
               </Menu.Item>
-
 
                 <SubMenu
                   key="sub1"
@@ -183,12 +181,3 @@ function Dashboard() {
 }
 
 export default Dashboard;
-
-// function getItem(label, key, icon, children) {
-//   return {
-//     key,
-//     icon,
-//     children,
-//     label,
-//   };
-// }

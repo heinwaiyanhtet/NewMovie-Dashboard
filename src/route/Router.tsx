@@ -7,7 +7,6 @@ import Form from '../pages/Form';
 import Singup from '../pages/Singup';
 import { FunctionComponent } from 'react';
 import React from 'react';
-import UserAuth from '../pages/UserAuth';
 import ConfirmedCode from '../pages/ConfirmedCode';
 
 const Router: FunctionComponent = () => {
@@ -15,19 +14,16 @@ const Router: FunctionComponent = () => {
   return (
     <BrowserRouter>
       <Routes>
-        
         <Route path="/" element={<SharedLayout />}>
           <Route index element={<Dashboard />} />
           <Route path="/users" element={<Users />} />
           <Route path="/form" element={<Form />} />
         </Route>
-
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Singup />} />
         <Route path="/confirmation-code/:username" element={<ConfirmedCode />}/>
-        <Route path="/user-auth" element={<UserAuth signOut={undefined} user={undefined} />}/>
-
       </Routes>
+
     </BrowserRouter>
   );
 };

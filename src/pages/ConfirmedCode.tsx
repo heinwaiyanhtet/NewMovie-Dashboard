@@ -1,7 +1,9 @@
-import {  Card, Input } from 'antd'
+import { Card } from 'antd'
 import { Auth } from 'aws-amplify';
 import React, { ChangeEvent, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import Swal from 'sweetalert2';
+
 
 interface SignUpFormData {
     code:string,
@@ -9,7 +11,6 @@ interface SignUpFormData {
 
 const ConfrimatinCode : React.FC = () => {
   const parms = useParams(); 
-
   const [formData, setFormData] = useState<SignUpFormData>({
        code:'',
   });
@@ -22,8 +23,21 @@ const ConfrimatinCode : React.FC = () => {
     e.preventDefault();
     try {
             await Auth.confirmSignUp(parms.username, formData.code);
+
+            await Swal.fire({
+              icon:'success',
+              title:'Confirm account',
+              text:`your account is successfully confirmed`,
+            });
+
         } catch (error) {
             console.log('error confirming sign up', error);
+            
+            await Swal.fire({
+              icon:'error',
+              title:'Error signing up',
+              text:error.message
+            })
         }
   };
 
@@ -34,7 +48,7 @@ const ConfrimatinCode : React.FC = () => {
 
             <div className="mb-4">
                     <label htmlFor="code" className="block text-gray-700 font-medium mb-2">
-                    Confirmation Code
+                       Confirmation Code
                     </label>
                     <input
                     type="text"
@@ -47,7 +61,7 @@ const ConfrimatinCode : React.FC = () => {
                 </div>
 
                 <button type="submit" className="mt-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                            Click me
+                            Confirm 
                 </button>
 
             </form>

@@ -1,12 +1,15 @@
 import { Amplify, Auth } from 'aws-amplify';
 import React from 'react';
 import { useState } from 'react';
+import Swal from 'sweetalert2';
+
 import AwsConfigAuth from "../config/auth";
 (Amplify as any).configure({ Auth: AwsConfigAuth });
 
 
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import {  Input } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
 
 function Login() {
@@ -15,6 +18,7 @@ function Login() {
     username:'',
     password: '',
   });
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,13 +27,18 @@ function Login() {
 
   const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      const result = await Auth.signIn(formData.username,formData.password)
-      if(result.success){
-          console.log("you are authenticated");
+
+      try{
+        Auth.signIn(formData.username,formData.password)
+        navigate('/');
       }
-      else
-      {
-          console.log("mahar nay par tal")
+      
+      catch(error){
+        await Swal.fire({
+          icon:'error',
+          title:'Error in log in',
+          text:`${error.message}`
+        })
       }
 
   };
