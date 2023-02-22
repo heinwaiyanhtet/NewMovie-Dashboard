@@ -1,6 +1,8 @@
 const AwsConfigAuth = {
-    userPoolId: 'us-east-1_F5zpL0Sb2',
-
-    userPoolWebClientId: '3ve1g9imt3brp9qgo568u84ufl',
-}
+    userPoolId: import.meta.env.VITE_REACT_APP_AUTH_USER_POOL_ID,
+    userPoolWebClientId: import.meta.env.VITE_REACT_APP_AUTH_USER_POOL_WEB_CLIENT_ID,
+};
+  
 export default AwsConfigAuth;
+
+  

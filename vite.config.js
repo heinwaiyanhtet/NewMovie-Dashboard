@@ -5,6 +5,13 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()], 
   define: {
-    "global": {},
+    "global": {
+
+      // "ImportMeta": {
+      //   readonly url: string;
+      //   readonly [key: string]: unknown;
+      // }
+
+    },
   },
 })

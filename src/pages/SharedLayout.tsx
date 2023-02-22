@@ -5,7 +5,9 @@ import {
   DesktopOutlined,
   DashboardOutlined,
   EyeOutlined,
+  PlayCircleOutlined
 } from "@ant-design/icons";
+
 import {
   Layout,
   Menu,
@@ -18,8 +20,8 @@ const {SubMenu} = Menu;
 
 import env from "react-dotenv";
 
-import UserMenu from "../partials/header/UserMenu";
-import BreadCrumb from "../partials/header/BreadCrumb";
+import UserMenu from "../components/header/UserMenu";
+import BreadCrumb from "../components/header/BreadCrumb";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 const MenuKeyRef = React.createRef();
 
@@ -32,6 +34,7 @@ function Dashboard() {
   } = theme.useToken();
   
   const location = useLocation();  
+
   const navigation = useNavigate();
   const NavigationHandle = (url : string) : void => {
       navigation(url);
@@ -39,7 +42,7 @@ function Dashboard() {
 
   useEffect(() => {
     // console.log(env)
-    console.log(env.REACT_APP_AUTH_REGION)
+    console.log()
   },[]);
 
   return (
@@ -141,9 +144,19 @@ function Dashboard() {
                   Option 4
                 </Menu.Item>
               </SubMenu>
+
+
+              <Menu.Item key="8"
+                         icon={<PlayCircleOutlined />}
+                         onClick={_ => NavigationHandle('/movies')}
+                         className={location.pathname==="/movies" ? "ant-menu-item-selected" : ""}
+              >
+                <span className="select-none">
+                        movies
+                 </span>
+              </Menu.Item>
             </Menu>
       </Sider>
-
 
       <Layout className={`site-layout ${collapsed ? "ml-20" : "ml-56"}`}>
         <Header
@@ -175,6 +188,7 @@ function Dashboard() {
             <Outlet />
         </Content>
       </Layout>
+
     </Layout>
   );
 

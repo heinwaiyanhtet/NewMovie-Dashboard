@@ -1,18 +1,20 @@
 import React from 'react';
-// import {
-//   useLocation
-// } from 'react-router-dom';
 import './css/main.css';
-
-
 import Router from './route/Router';
-// Import pages
+import 
+{ 
+  QueryClient,
+  QueryClientProvider
+} from '@tanstack/react-query';
+const queryClient = new QueryClient();
 
 
 function App() {
   return (
       <React.StrictMode>
-          <Router />
+        <QueryClientProvider client={queryClient}>
+            <Router />
+        </QueryClientProvider>
       </React.StrictMode>
   );
 }

@@ -41,6 +41,9 @@ const ConfrimatinCode : React.FC = () => {
         }
   };
 
+
+
+
   return (
     <div className='flex justify-center mt-44'>        
         <Card title="Card title" bordered={false} style={{ width: 500 }}>

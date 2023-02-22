@@ -2,14 +2,11 @@ import { Amplify,Auth} from 'aws-amplify';
 import React, { ChangeEvent, ChangeEventHandler } from 'react';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { Input } from 'antd';
-
 import AwsConfigAuth from "../config/auth";
-
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Swal from 'sweetalert2';
-
 (Amplify as any).configure({ Auth: AwsConfigAuth });
 
 interface SignUpFormData {
