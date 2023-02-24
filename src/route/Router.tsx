@@ -9,6 +9,7 @@ import { FunctionComponent } from 'react';
 import React from 'react';
 import ConfirmedCode from '../pages/ConfirmedCode';
 import Movies from '../pages/Movies';
+import MovieCreate from '../pages/MovieCreate';
 
 const Router: FunctionComponent = () => {
   // const params = useParams();
@@ -20,7 +21,8 @@ const Router: FunctionComponent = () => {
           <Route index element={<Dashboard />} />
           <Route path="/users" element={<Users />} />
           <Route path="/form" element={<Form />} />
-          <Route path='/movies' element={<Movies />}/>
+          <Route path='/movies' element={<Movies />}></Route>
+          <Route path="/movies/create" element={<MovieCreate/>}/>
         </Route>
 
         <Route path="/login" element={<Login />} />

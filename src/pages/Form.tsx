@@ -24,7 +24,7 @@ function Form() {
     console.log(formData);
     // handle form submission logic here
   };
-
+  
   return (
     <div className="max-w-md mx-auto bg-white p-8 rounded-md shadow-md">
       <h2 className="text-lg font-medium mb-4">Contact Us</h2>
