@@ -2,12 +2,49 @@ import {
   useQuery,
 } from '@tanstack/react-query'
 import axios from 'axios';
+import { resolve } from 'path';
 import React, { useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component';
 import ButtonForTable from '../components/Titles/ButtonForTable';
 // import Button from '../components/Titles/ButtonForTable';
 import contentService from '../services/contentService';
 // import Da from 'react-data-table-component'
+
+interface response{
+  keywords:string,
+  titleEn:string,
+  titleMm:string,
+  descriptionEn:string,
+  descriptionMm:string,
+  type:string,
+  Id:string,
+  CreatedAt:string,
+  UpdatedAt:string,
+  CreatedBy:any,
+  UpdatedBy:any
+}
+
+function deleteTitle(id){
+  return new Promise((resolve,reject) =>{
+    contentService.deleteTitle(id)
+    .then(() => {
+      resolve("successful")
+    })
+   .catch(err => {
+    reject("got rejected")
+    })
+  })
+};
+
+function fetchTitleUse(id){
+  deleteTitle(id)
+  .then((response) => {
+    console.log(response)
+  })
+  .catch(err => {
+    console.log(err);
+  })
+}
 
 
 const columns = [
@@ -52,23 +89,21 @@ const columns = [
     name: "Actions",
     cell: (row) => (
       <> 
-        <ButtonForTable
-            onClick={() => {
-               console.log(`${row.Id}`);
-            }}
-            title="Edit"
-            
-        />
+          <ButtonForTable
+              onClick={() => {
+                  console.log(`${row.id}`);
+              }}
+              title="Edit"
+              
+          />
 
         <ButtonForTable
             onClick={() => {
-              console.log(row.Id)
-              contentService.deleteTitle(row.Id)
-              
+                fetchTitleUse(row.id)              
             }}
             title="Delete"
         />
-      </>
+    </>
      
     ),
     width:'300px'
@@ -78,39 +113,19 @@ const columns = [
 ];
 
 
-// const data = [
-//   {
-//       id: 1,
-//       title: 'Beetlejuice',
-//       year: '1988',
-//   },
-//   {
-//       id: 2,
-//       title: 'Ghostbusters',
-//       year: '1984',
-//   },
-// ]
-
-
-// function fetchContentServiceTitles() {
-//   return fetch("https://content-dev.maharstg.com/ContentService/Titles")
-//         .then((response) => response.json())
-// }
-
-
 export default function Movies() {
 
-  const [products,setProducts] = useState([]);
+  const [products,setProducts] = useState<response[]>([]);
 
-  const {
-    isLoading,
-    isSuccess,
+  // const {
+  //   isLoading,
+  //   isSuccess,
+  //   data: fakeStoreProducts,
+  // } = useQuery(["fakeStoreProducts"], fetchFakeStore);
+  
+  // function fetchFakeStore() {
 
-    data: fakeStoreProducts,
-  } = useQuery(["fakeStoreProducts"], fetchFakeStore);
-
-  function fetchFakeStore() {
-    return new Promise((resolve,reject) =>{
+   const getTitleFromApi =  new Promise<response[]>((resolve,reject) =>{
         contentService.getTitles()
         .then((response) => {
             resolve(response.data)
@@ -119,47 +134,33 @@ export default function Movies() {
           reject("got rejected")
         })
     })
-    // return contentService.getTitles()
-    // .then((response) =>
-    //   response.json()
-    // );
-  }
+  // }
 
   useEffect( () : (() => void) => {
     return () => {
-      fetchFakeStore()
-      .then((response) => {
-        // console.log(response.value)
-        setProducts(response.value);
-      })
+      getTitleFromApi
+      .then((response : response[]) => setProducts(response))
       .catch(err => {
-        console.log(err);
+        console.log("error",err);
       })
     };
-  }, [fakeStoreProducts]);
 
+  }, []);
 
-
-  // useEffect(() => {
-  //   fetch('https://content-dev.maharstg.com/ContentService/Titles')
-  //     .then((response) => response.json())
-  //     .then((data) => setData(data));
-  //     // console.log(data);
-  // }, []);
   
   return (
     <>
 
-    {
+    {/* {
       isLoading && (
           <h1>Here is loading</h1>
       )
-    }
+    } */}
 
     
-      {
+      {/* {
           isSuccess && 
-            (
+            ( */}
               
                   <DataTable 
                       title="Title Table"
@@ -167,8 +168,10 @@ export default function Movies() {
                       data={products}   
                       pagination
                   />
+
+{/*                   
             )
-      }
+      } */}
     </>
     //<DataTable columns={columns}  />
     // <>

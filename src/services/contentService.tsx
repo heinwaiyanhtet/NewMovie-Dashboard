@@ -1,6 +1,5 @@
 import axios from "axios";
 
-
 interface titlePost{
     keywords:string,
     titleEn:string,
@@ -8,44 +7,36 @@ interface titlePost{
     descriptionEn:string,
     descriptionMm:string,
     type:string,
-    Id:string,
     CreatedAt:string,
     UpdatedAt:string,
     CreatedBy:any,
     UpdatedBy:any
-}
+}  
 
-  
-
-const contentInstance = axios.create({
-    baseURL:'http://content.local/ContentService',
-    // withCredentials:false,
+const apiClient = axios.create({
+    baseURL:"http://localhost:3000",
+    withCredentials:false,
     headers:{
-        // 'Access-Control-Allow-Origin': '*'
-        // Accept:'application/json',
-        // 'Content-type':'application/json',
+         Accept:'application/json',
+        'Content-type':'application/json'
     }
 })
 
 export default {
     getTitles(){
-        return contentInstance.get('/Titles')
+        return apiClient.get('/Titles')
     },
 
     deleteTitle(id:number){
-        return contentInstance.delete('/Titles/'+id) 
+        return apiClient.delete('/Titles/'+id) 
     },
 
     postTitle(titles:titlePost){
-        return contentInstance.post('/Titles',{
+        console.log(titles)
+        return apiClient.post('/Titles',
             titles,
-        })
+        )
     }
-    
-
-    // getTitle(id:number){
-    //     return contentInstance.get('/Titles/'+id)
-    // }
 }
 
 
