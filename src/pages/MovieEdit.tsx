@@ -15,7 +15,7 @@ interface formData{
   UpdatedBy:any
 }
 
-function MovieCreate() {
+function MovieEdit() {
   const [formData, setFormData] = useState<formData>({
     Keywords: '',
     TitleEn:'',
@@ -150,5 +150,5 @@ function MovieCreate() {
   );
 }
 
-export default MovieCreate;
+export default MovieEdit;
 

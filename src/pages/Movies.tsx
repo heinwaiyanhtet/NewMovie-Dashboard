@@ -2,7 +2,6 @@ import {
   useQuery,
 } from '@tanstack/react-query'
 import axios from 'axios';
-import { resolve } from 'path';
 import React, { useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component';
 import ButtonForTable from '../components/Titles/ButtonForTable';

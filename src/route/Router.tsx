@@ -10,6 +10,7 @@ import React from 'react';
 import ConfirmedCode from '../pages/ConfirmedCode';
 import Movies from '../pages/Movies';
 import MovieCreate from '../pages/MovieCreate';
+import MovieEdit from '../pages/MovieEdit';
 
 const Router: FunctionComponent = () => {
   // const params = useParams();
@@ -23,8 +24,8 @@ const Router: FunctionComponent = () => {
           <Route path="/form" element={<Form />} />
           <Route path='/movies' element={<Movies />}></Route>
           <Route path="/movies/create" element={<MovieCreate/>}/>
+          <Route path='/movies/edit/:id' element={<MovieEdit/>}/>
         </Route>
-
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Singup />} />
         <Route path="/confirmation-code/:username" element={<ConfirmedCode />}/>
