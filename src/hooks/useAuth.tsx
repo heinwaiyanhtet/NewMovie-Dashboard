@@ -51,7 +51,8 @@ const useProvideAuth = (): UseAuth => {
             })
             .catch(() => {
                 setUsername("");
-                setIsAuthenticated(false);
+                setIsAuthenticated(false);        <QueryClientProvider client={queryClient}>
+
                 setIsLoading(false);
             });
     }, []);

@@ -2,21 +2,19 @@ import {
   useQuery,
 } from '@tanstack/react-query'
 import axios from 'axios';
-import { resolve } from 'path';
 import React, { useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component';
 import ButtonForTable from '../components/Titles/ButtonForTable';
 // import Button from '../components/Titles/ButtonForTable';
 import contentService from '../services/contentService';
-// import Da from 'react-data-table-component'
 
 interface response{
-  keywords:string,
-  titleEn:string,
-  titleMm:string,
-  descriptionEn:string,
-  descriptionMm:string,
-  type:string,
+  Keywords:string,
+  TitleEn:string,
+  TitleMm:string,
+  DescriptionEn:string,
+  DescriptionMm:string,
+  Type:string,
   Id:string,
   CreatedAt:string,
   UpdatedAt:string,
@@ -24,9 +22,9 @@ interface response{
   UpdatedBy:any
 }
 
-function deleteTitle(id){
+function deleteTitle(Id){
   return new Promise((resolve,reject) =>{
-    contentService.deleteTitle(id)
+    contentService.deleteTitle(Id)
     .then(() => {
       resolve("successful")
     })
@@ -36,8 +34,8 @@ function deleteTitle(id){
   })
 };
 
-function fetchTitleUse(id){
-  deleteTitle(id)
+function fetchTitleUse(Id){
+  deleteTitle(Id)
   .then((response) => {
     console.log(response)
   })
@@ -91,7 +89,7 @@ const columns = [
       <> 
           <ButtonForTable
               onClick={() => {
-                  console.log(`${row.id}`);
+                  console.log(`${row.Id}`);
               }}
               title="Edit"
               
@@ -99,7 +97,7 @@ const columns = [
 
         <ButtonForTable
             onClick={() => {
-                fetchTitleUse(row.id)              
+                fetchTitleUse(row.Id)              
             }}
             title="Delete"
         />
@@ -128,7 +126,8 @@ export default function Movies() {
    const getTitleFromApi =  new Promise<response[]>((resolve,reject) =>{
         contentService.getTitles()
         .then((response) => {
-            resolve(response.data)
+          // console.log(response.data.value)
+            resolve(response.data.value)
         })
         .catch(err => {
           reject("got rejected")

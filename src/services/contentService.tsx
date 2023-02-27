@@ -7,6 +7,7 @@ interface titlePost{
     descriptionEn:string,
     descriptionMm:string,
     type:string,
+    Id:string,
     CreatedAt:string,
     UpdatedAt:string,
     CreatedBy:any,
@@ -14,7 +15,7 @@ interface titlePost{
 }  
 
 const apiClient = axios.create({
-    baseURL:"http://localhost:3000",
+    baseURL:"http://content.local/ContentService",
     withCredentials:false,
     headers:{
          Accept:'application/json',
@@ -30,7 +31,7 @@ export default {
     deleteTitle(id:number){
         return apiClient.delete('/Titles/'+id) 
     },
-
+    
     postTitle(titles:titlePost){
         console.log(titles)
         return apiClient.post('/Titles',
