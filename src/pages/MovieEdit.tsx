@@ -1,5 +1,6 @@
 import React from 'react';
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useState,useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import contentService from '../services/contentService';
 
 interface formData{
@@ -16,7 +17,7 @@ interface formData{
 }
 
 function MovieEdit() {
-  
+
   const [formData, setFormData] = useState<formData>({
     Keywords: '',
     TitleEn:'',
@@ -30,11 +31,19 @@ function MovieEdit() {
     UpdatedBy: "wai"
   });
 
+  const param = useParams();
+  
+  useEffect(() => {
+    return () => {
+        console.log(param.id)
+    };
+  }, [])
+
+
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
-
 
   function fetchTitle(){
     return new Promise((resolve,reject) =>{
@@ -48,7 +57,6 @@ function MovieEdit() {
   })
   }
 
-
   const handleSubmit = (e : FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     fetchTitle()
@@ -58,11 +66,11 @@ function MovieEdit() {
     .catch(err => {
       console.log(err)
     })
-    // handle form submission logic here
   };
   
   return (
-    <div className="mx-auto bg-white p-8 rounded-md shadow-md">
+
+  <div className="mx-auto bg-white p-8 rounded-md shadow-md">
       <h2 className="text-lg font-medium mb-4">Contact Us</h2>
       <form onSubmit={handleSubmit}>
         
@@ -109,7 +117,6 @@ function MovieEdit() {
             className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
           />
         </div>
-
 
 
         <div className="mb-4">

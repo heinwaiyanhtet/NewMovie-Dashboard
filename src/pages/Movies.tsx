@@ -24,12 +24,6 @@ interface response{
   UpdatedBy:any
 }
 
-
-
-
-
-
-
 export default function Movies() {
 
   const [products,setProducts] = useState<response[]>([]);
@@ -110,6 +104,7 @@ export default function Movies() {
       name: "Actions",
       cell: (row) => (
         <> 
+          
             <ButtonForTable
                 onClick={() => {
                     NavigationHandle(`/movies/edit/${row.id}`)
@@ -132,7 +127,6 @@ export default function Movies() {
     },
   
   ];
-  
 
    const getTitleFromApi =  new Promise<response[]>((resolve,reject) =>{
         contentService.getTitles()
@@ -158,6 +152,8 @@ export default function Movies() {
     };
 
   }, []);
+
+
 
   
   return (
