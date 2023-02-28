@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import routeSlice from "./route-slice";
+import contentTitleSlice from "./contentTitle-slice";
 
 const store = configureStore({
   reducer: {
-     routeSlice:routeSlice.reducer,
+     contentSlice:contentTitleSlice.reducer,          
   },
 });
 

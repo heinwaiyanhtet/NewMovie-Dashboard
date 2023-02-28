@@ -1,13 +1,15 @@
 import {
   useQuery,
 } from '@tanstack/react-query'
-import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component';
+import { useDispatch } from 'react-redux';
 import { useNavigate, useNavigation } from 'react-router-dom';
 import ButtonForTable from '../components/Titles/ButtonForTable';
 // import Button from '../components/Titles/ButtonForTable';
 import contentService from '../services/contentService';
+import { contentTitleActions } from '../store/contentTitle-slice';
+
 
 
 interface response{
@@ -28,6 +30,9 @@ export default function Movies() {
 
   const [products,setProducts] = useState<response[]>([]);
   const navigation = useNavigate();
+  const dispatch = useDispatch();
+
+  
   const NavigationHandle = (url : string) : void => {
       navigation(url);
   };
@@ -110,7 +115,6 @@ export default function Movies() {
                     NavigationHandle(`/movies/edit/${row.id}`)
                 }}
                 title="Edit"
-                
             />
   
           <ButtonForTable
@@ -139,20 +143,22 @@ export default function Movies() {
     })
 
 
-
   // }
 
   useEffect( () : (() => void) => {
     return () => {
       getTitleFromApi
-      .then((response : response[]) => setProducts(response))
+      .then((response : response[]) => {
+        dispatch(contentTitleActions.addToTitle(response));
+        setProducts(response)
+      })
+
       .catch(err => {
         console.log("error",err);
       })
     };
 
   }, []);
-
 
 
   
