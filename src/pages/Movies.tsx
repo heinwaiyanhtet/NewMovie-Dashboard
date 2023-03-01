@@ -11,7 +11,6 @@ import contentService from '../services/contentService';
 import { contentTitleActions } from '../store/contentTitle-slice';
 
 
-
 interface response{
   keywords:string,
   titleEn:string,
@@ -124,7 +123,6 @@ export default function Movies() {
               title="Delete"
           />
       </>
-       
       ),
       width:'300px'
   
@@ -142,24 +140,24 @@ export default function Movies() {
         })
     })
 
-
   // }
 
   useEffect( () : (() => void) => {
-    return () => {
-      getTitleFromApi
-      .then((response : response[]) => {
-        dispatch(contentTitleActions.addToTitle(response));
-        setProducts(response)
-      })
+    return () => {  
 
-      .catch(err => {
-        console.log("error",err);
-      })
+        getTitleFromApi
+        .then((response : response[]) => {
+            dispatch(contentTitleActions.addToTitle(response));
+            setProducts(response);
+        })
+
+        .catch(err => {
+          console.log("error",err);
+        })
     };
 
-  }, []);
 
+  }, []);
 
   
   return (

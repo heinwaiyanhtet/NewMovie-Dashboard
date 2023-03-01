@@ -1,19 +1,33 @@
 import { createSlice } from "@reduxjs/toolkit";
-// import { useNavigate } from "react-router-dom";
 
+interface ContentTitleSliceType {
+    contentTitle: string[];
+}
+
+interface ContentTitleState {
+    contentTitle: string[];
+}
+  
 const contentTitleSlice = createSlice({
     name:"contentSlice",
-    initialState:{
+    
+    initialState : {
         contentTitle : [],
-    },
+    } as ContentTitleState,
 
-    reducers:{
+    reducers : {
         addToTitle(state,action){
             const newItem = action.payload;
-            state.contentTitle.push(newItem);
+            if(action.type = "contentSlice/addToTitle")
+                state.contentTitle = newItem;
+                // return {
+                //     ...state,
+                //     contentTitle: [...state.contentTitle, newItem]
+                // }
         }
     }
 })
 
 export const contentTitleActions = contentTitleSlice.actions;
+export type contentTitleSliceState = ContentTitleSliceType;
 export default contentTitleSlice;

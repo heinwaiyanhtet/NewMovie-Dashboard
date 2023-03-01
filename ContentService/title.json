@@ -196,19 +196,6 @@
       "id": "8QDPX47"
     },
     {
-      "Keywords": "",
-      "TitleEn": "",
-      "TitleMm": "",
-      "DescriptionEn": "",
-      "DescriptionMm": "",
-      "Type": "movies",
-      "CreatedAt": "2020-12-25T08:51:03+06:30",
-      "UpdatedAt": "2023-01-14T03:16:53+06:30",
-      "CreatedBy": "hein",
-      "UpdatedBy": "wai",
-      "id": "Rypav4E"
-    },
-    {
       "Keywords": "Keywords",
       "TitleEn": "Title English",
       "TitleMm": "မြန်မာလို နိမ်း",
@@ -220,6 +207,31 @@
       "CreatedBy": "hein",
       "UpdatedBy": "wai",
       "id": "aGyC2Sy"
+    },
+    {
+      "0": {
+        "Keywords": "for edit updated",
+        "TitleEn": "Hello Title En updated!",
+        "TitleMm": "မြန်မာလို န်မ် updated",
+        "DescriptionEn": "Descr En updated",
+        "DescriptionMm": "က်််််င်ြေြ်၉ေ updated",
+        "Type": "movies",
+        "CreatedAt": "2020-12-25T08:51:03+06:30",
+        "UpdatedAt": "2023-01-14T03:16:53+06:30",
+        "CreatedBy": "hein",
+        "UpdatedBy": "wai"
+      },
+      "Keywords": "for edit is updated",
+      "TitleEn": "Hello Title En is updated",
+      "TitleMm": "မြန်မာလို န်မ် is updated",
+      "DescriptionEn": "Descr En is updated",
+      "DescriptionMm": "က်််််င်ြေြ်၉ေ is updated",
+      "Type": "movie",
+      "CreatedAt": "2020-12-25T08:51:03+06:30",
+      "UpdatedAt": "2023-01-14T03:16:53+06:30",
+      "CreatedBy": "hein",
+      "UpdatedBy": "wai",
+      "id": "g-qSqdX"
     }
   ]
 }

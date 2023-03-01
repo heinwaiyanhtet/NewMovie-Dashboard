@@ -39,11 +39,22 @@ export default {
             titles,
         )
     },
-
+    
     patchTitle(id:string|number,...args){
-        return apiClient.patch(`/Titles/${id}`,{
-            ...args
-        })
+        console.log(...args)
+        const copyArgs = Object.assign({},...args)
+        return apiClient.patch
+        (
+            `/Titles/${id}`,
+            {
+                Keywords:copyArgs.Keywords,
+                TitleEn:copyArgs.TitleEn,
+                TitleMm:copyArgs.TitleMm,
+                DescriptionEn:copyArgs.DescriptionEn,
+                DescriptionMm:copyArgs.DescriptionMm,
+                Type:"movie"
+            }
+        )
     }
    
 }

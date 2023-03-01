@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { ChangeEvent, FormEvent, useState,useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import contentService from '../services/contentService';
 
@@ -31,49 +32,54 @@ function MovieEdit() {
     UpdatedBy: "wai"
   });
 
+  const [formDataPerTitle, setformDataPerTitle] = useState([]);
+  const stateContentTitle = useSelector(state => state.contentSlice.contentTitle);
+  const refTitle = useRef();
   const param = useParams();
-  
   useEffect(() => {
     return () => {
-        console.log(param.id)
+        const getContentById = stateContentTitle.find(item => item.id === param.id);
+        setformDataPerTitle(getContentById);
     };
   }, [])
 
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
-  };
-
-  function fetchTitle(){
-    return new Promise((resolve,reject) =>{
-      contentService.postTitle(formData)
-      .then((response) => {
-          resolve(response)
+  const patchFormData = (formData: any) => {
+    // console.log(formData);
+      return new Promise((resolve,reject) => {
+          contentService.patchTitle(param.id,formData)
+          // .then((response) => {
+          //   resolve(response)
+          //   })  
+          // .catch(err => {
+          //   reject("got rejected")
+          // })
       })
-      .catch(err => {
-        reject("got rejected")
-      })
-  })
   }
 
   const handleSubmit = (e : FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    fetchTitle()
-    .then((respose) => {
-      console.log(respose)
-    })
-    .catch(err => {
-      console.log(err)
-    })
+      e.preventDefault();
+        // patchFormData
+      patchFormData(formData)
+      // .then((respose) => {
+      //   console.log(respose)
+      // })
+      // .catch(err => {
+      //   console.log(err)
+      // })
+  };
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      e.preventDefault();
+      const { name, value } = e.target;
+      setFormData((prevData) => ({ ...prevData, [name]: value })); 
   };
   
   return (
-
   <div className="mx-auto bg-white p-8 rounded-md shadow-md">
       <h2 className="text-lg font-medium mb-4">Contact Us</h2>
+
       <form onSubmit={handleSubmit}>
-        
+  
         <div className="mb-4">
           <label htmlFor="Keywords" className="block text-gray-700 font-medium mb-2">
             Keywords
@@ -82,8 +88,10 @@ function MovieEdit() {
             type="text"
             id="Keywords"
             name="Keywords"
-            value={formData.Keywords}
-            onChange={handleChange}
+            ref={refTitle}
+            defaultValue={formDataPerTitle.Keywords}
+            // value={formData.Keywords}
+           onChange={handleChange}
             className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
           />
         </div>
@@ -97,7 +105,8 @@ function MovieEdit() {
             type="text"
             id="TitleEn"
             name="TitleEn"
-            value={formData.TitleEn}
+            defaultValue={formDataPerTitle.TitleEn}
+            // value={formData.TitleEn}
             onChange={handleChange}
             className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
           />
@@ -112,8 +121,9 @@ function MovieEdit() {
             type="text"
             id="TitleMm"
             name="TitleMm"
-            value={formData.TitleMm}
-            onChange={handleChange}
+            defaultValue={formDataPerTitle.TitleMm}
+            // value={formData.TitleMm}
+           onChange={handleChange}
             className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
           />
         </div>
@@ -126,8 +136,9 @@ function MovieEdit() {
           <textarea
             id="DescriptionEn"
             name="DescriptionEn"
-            value={formData.DescriptionEn}
-            onChange={handleChange}
+            defaultValue={formDataPerTitle.DescriptionEn}
+            // value={formData.DescriptionEn}
+           onChange={handleChange}
             rows={5}
             className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
           />
@@ -141,7 +152,8 @@ function MovieEdit() {
           <textarea
             id="DescriptionMm"
             name="DescriptionMm"
-            value={formData.DescriptionMm}
+            defaultValue={formDataPerTitle.DescriptionMm}
+            // value={formData.DescriptionMm}
             onChange={handleChange}
             rows={5}
             className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"

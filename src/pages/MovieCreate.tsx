@@ -47,7 +47,6 @@ function MovieCreate() {
   })
   }
 
-
   const handleSubmit = (e : FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     fetchTitle()
